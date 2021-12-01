@@ -24,4 +24,15 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\CategoryArea\Controllers\" />
+    <Folder Include="Areas\CategoryArea\Data\" />
+    <Folder Include="Areas\CategoryArea\Models\" />
+    <Folder Include="Areas\CategoryArea\Views\" />
+    <Folder Include="Areas\DailyExpenseArea\Controllers\" />
+    <Folder Include="Areas\DailyExpenseArea\Data\" />
+    <Folder Include="Areas\DailyExpenseArea\Models\" />
+    <Folder Include="Areas\DailyExpenseArea\Views\" />
+  </ItemGroup>
+
 </Project>

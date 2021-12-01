@@ -151,38 +151,6 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
                     Email = model.Email,
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    //await _userManager.AddToRoleAsync(user, model.RoleId);
-                    //IdentityUser temp = await _userManager.FindByNameAsync(model.Name);
-                    //var emp = await personalInfoService.GetEmployeeInfoByCode(model.EmpCode);
-                    //emp.ApplicationUserId = temp.Id;
-                    //emp.rankId = model.RankName;
-                    //emp.sectionId = model.SectionName;
-                    //emp.designationsId = model.DesignationName;
-                    //await personalInfoService.SaveEmployeeInfo(emp);
-                    //return RedirectToLocal("/");
-                }
-
-
-
-                //if (model.EmpId != 0)
-                //{
-                //    if (message == "success")
-                //    {
-                //        Photograph data = new Photograph
-                //        {
-                //            Id = 0,
-                //            employeeId = model.EmpId,
-                //            url = fileName,
-                //            type = "profile"
-                //        };
-                //        await _photograph.SavePhotograph(data);
-                //    }
-                //}
-
-
                 AddErrors(result);
             }
 
@@ -200,10 +168,6 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
             var formData = new RegisterViewModel
             {
                 userRoles = lstRole,
-                //Designations = await _designationDepartmentService.GetDesignations(),
-                //Ranks = await _rank.GetRanks(),
-                //Sections = await _section.GetSections(),
-                //Photographs = await _photograph.GetPhotographs(),
             };
             return View(formData);
 
