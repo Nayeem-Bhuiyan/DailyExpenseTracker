@@ -24,4 +24,11 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Category\Controllers\" />
+    <Folder Include="Areas\Category\Data\" />
+    <Folder Include="Areas\Category\Models\" />
+    <Folder Include="Areas\Category\Views\" />
+  </ItemGroup>
+
 </Project>
