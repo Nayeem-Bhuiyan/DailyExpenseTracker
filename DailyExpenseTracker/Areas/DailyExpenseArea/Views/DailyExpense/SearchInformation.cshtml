@@ -117,6 +117,9 @@
                 order: [[0, "desc"]]
             });
 
+            var d = new Date();
+            var strDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+            $('#endDate').val(strDate);
             $('#startDate').flatpickr({ dateFormat: "Y-m-d", minDate: "@DateTime.Now.ToString("MM/dd/yyyy")", maxDate:"today" });
             $('#endDate').flatpickr({ dateFormat: "Y-m-d", minDate: "@DateTime.Now.ToString("MM/dd/yyyy")", maxDate:"today" });
         })

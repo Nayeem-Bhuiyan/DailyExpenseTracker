@@ -33,6 +33,7 @@
     <!-- END CSS for this page -->
     <link href="~/assets/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
     <link href="~/assets/flatpikr/material_green.css" rel="stylesheet" />
+    <link href="~/assets/select2/dist/css/select2.min.css" rel="stylesheet" />
     @RenderSection("Style", required: false)
 </head>
 
@@ -43,7 +44,7 @@
         <div class="headerbar">
             <!-- LOGO -->
             <div class="headerbar-left">
-                <a href="index.html" class="logo"><img alt="Logo" src="/assets/images/logo.png" /> <span>Admin</span></a>
+                <a href="index.html" class="logo"><img alt="Logo" src="/DesignImage/LoginLogo.png" /> <span>Expense</span></a>
             </div>
             <nav class="navbar-custom">
                 <ul class="list-inline float-right mb-0">
@@ -59,7 +60,7 @@
                                     <h5 class="text-overflow"><small>@userInfos?.UserName</small> </h5>
                                 </div>
                                 <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
+                                <a href="/Home/Index" class="dropdown-item notify-item">
                                     <i class="fa fa-user"></i> <span>Profile</span>
                                 </a>
                                 <!-- item-->
@@ -155,6 +156,7 @@
     <script src="/assets/js/jquery.blockUI.js"></script>
     <script src="/assets/js/jquery.nicescroll.js"></script>
     <script src="~/assets/flatpikr/flatpickr.min.js"></script>
+    <script src="~/assets/select2/dist/js/select2.full.min.js"></script>
     <!-- App js -->
     <script src="/assets/js/pikeadmin.js"></script>
     <!-- BEGIN Java Script for this page -->

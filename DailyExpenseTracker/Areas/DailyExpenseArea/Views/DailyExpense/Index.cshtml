@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Style{
-    
+    .select2 {
+    width: 100%!important;
+    }
 }
 
 <div class="row">
@@ -60,7 +62,7 @@
                     <div class="form-group row">
                         <label for="ExpenseDetails" class="col-sm-2 col-form-label">Expense Details</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="ExpenseDetails" name="ExpenseDetails" placeholder="Enter Expense Details"  autocomplete="off">
+                            <input type="text" class="form-control" id="ExpenseDetails" name="ExpenseDetails" placeholder="Enter Expense Details" autocomplete="off">
                         </div>
                     </div>
 
@@ -134,13 +136,20 @@
 
 
 @section Scripts{
-    
+
     <script>
         $(document).ready(function () {
             CleanData();
             $("#tblData").DataTable({
                 order: [[0, "desc"]]
             });
+
+            $('#CategoryId').select2();
+
+
+            var d = new Date();
+            var strDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+            $('#DateOfExpense').val(strDate);
 
             $('#DateOfExpense').flatpickr({ dateFormat: "Y-m-d", minDate: "@DateTime.Now.ToString("MM/dd/yyyy")", maxDate:"today" });
 
@@ -194,6 +203,7 @@
             $("#CostAmount").val(CostAmount);
             $("#DateOfExpense").val(formatDate(DateOfExpense));
             $("#ExpenseDetails").val(ExpenseDetails);
+            $("#CategoryId").val(CategoryId).trigger('change');
         }
 
         $('#btnSave').click(function () {

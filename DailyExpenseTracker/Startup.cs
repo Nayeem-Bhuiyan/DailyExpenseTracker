@@ -185,7 +185,7 @@ namespace DailyExpenseTracker
             app.UseMvc(routes => {
                 routes.MapRoute(
                 name: "MyArea",
-                template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                template: "{area=Auth}/{controller=Account}/{action=Login}/{id?}");
 
                 routes.MapRoute(
                     name: "default",

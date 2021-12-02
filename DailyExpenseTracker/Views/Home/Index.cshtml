@@ -1,3 +1,48 @@
-﻿@{
+﻿@using DailyExpenseTracker.Services.AuthService.Interfaces
+@using System
+
+@inject IUserInfoes userInfo
+@{
+
+    var userInfos = await userInfo.GetUserInfoByUser(@User.Identity.Name);
+}
+
+@{
     ViewData["Title"] = "Home Page";
 }
+<div class="row">
+    <div class="col-xl-12">
+        <div class="breadcrumb-holder">
+            <h1 class="main-title float-left">Profile Information</h1>
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-2x"></i></a></li>
+                <li class="breadcrumb-item active"><a href="#">Profile</a></li>
+            </ol>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+        <ul class="list-group">
+            <li class="list-group-item active text-center">Profile Informtion</li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                User Name
+                <span class="badge badge-primary badge-pill">@userInfos?.UserName</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Email
+                <span class="badge badge-primary badge-pill">@userInfos?.Email</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Phone Number
+                <span class="badge badge-primary badge-pill">@userInfos?.PhoneNumber</span>
+            </li>
+        </ul>
+    </div>
+    <!-- end card-body -->
+
+</div>
+<!-- end card -->

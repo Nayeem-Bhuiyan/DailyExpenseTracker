@@ -1,4 +1,5 @@
 ﻿using DailyExpenseTracker.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,6 +19,8 @@ namespace DailyExpenseTracker.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
