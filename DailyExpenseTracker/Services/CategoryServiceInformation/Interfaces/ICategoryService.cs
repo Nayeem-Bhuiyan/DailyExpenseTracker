@@ -8,7 +8,7 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation.Interfaces
 {
    public interface ICategoryService
     {
-        Task<List<Category>> GetAll();
+        Task<IEnumerable<Category>> GetAll();
         Task<Category> GetById(int? Id);
         Task<int> Insert(Category Category);
         Task<int> Update(Category model);

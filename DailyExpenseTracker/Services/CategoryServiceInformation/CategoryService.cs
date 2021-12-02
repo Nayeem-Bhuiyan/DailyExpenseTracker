@@ -17,7 +17,7 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
             _connectionString = configuration.GetConnectionString("AppDbConnection");
         }
 
-        public async Task<List<Category>> GetAll()
+        public async Task<IEnumerable<Category>> GetAll()
         {
             using (SqlConnection sql = new SqlConnection(_connectionString))
             {
