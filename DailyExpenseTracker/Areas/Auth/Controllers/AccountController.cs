@@ -426,13 +426,6 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, "General User");
-                    var login = await _signInManager.PasswordSignInAsync(model.Name, model.Password, model.RememberMe, lockoutOnFailure: true);
-                    return RedirectToAction("Privacy", "Home");
-                }
-              
                 AddErrors(result);
             }
          
@@ -506,21 +499,7 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
                     createdAt=DateTime.Now
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, model.RoleId);
-                    if (model.RoleId== "donar")
-                    {
-                        //await userInfoes.UpdatedonarIdById(model.donarId,user.Id);
-                    }
-                    else if (model.RoleId== "general user")
-                    {
-                        //await userInfoes.generalUser(model.id, user.Id);
-                    }
-                    //IdentityUser temp = await _userManager.FindByNameAsync(model.Name);
-                    //return RedirectToLocal(returnUrl);
-                    return RedirectToAction(nameof(UserList));
-                }
+
                 AddErrors(result);
             }
 
