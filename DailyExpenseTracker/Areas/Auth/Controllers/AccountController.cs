@@ -58,8 +58,6 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var userInfos = await userInfoes.GetUserInfoByUser(model.Name);
                 if (userInfos != null)
                 {
@@ -68,10 +66,7 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
                         var result = await _signInManager.PasswordSignInAsync(model.Name, model.Password, model.RememberMe, lockoutOnFailure: true);
                         if (result.Succeeded)
                         {
-                            var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-                            var userAgent = Request.Headers["User-Agent"].ToString();
-                            var mechineName = Environment.MachineName;
-                            return RedirectToLocal(returnUrl);
+                            return RedirectToAction("Index", "DailyExpense", new { area = "DailyExpenseArea"});
                         }
                         else
                         {
@@ -105,30 +100,10 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(string returnUrl = null)
+        public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-
-            var roles = await _roleManager.Roles.ToListAsync();
-            List<ApplicationRoleViewModel> lstRole = new List<ApplicationRoleViewModel>();
-            foreach (var data in roles)
-            {
-                ApplicationRoleViewModel modelr = new ApplicationRoleViewModel
-                {
-                    RoleId = data.Id,
-                    RoleName = data.Name
-                };
-                lstRole.Add(modelr);
-            }
-            var model = new RegisterViewModel
-            {
-                userRoles = lstRole,
-                //Designations = await _designationDepartmentService.GetDesignations(),
-                //Ranks = await _rank.GetRanks(),
-                //Sections = await _section.GetSections(),
-                //Photographs = await _photograph.GetPhotographs(),
-            };
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -139,9 +114,6 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
             if (ModelState.IsValid)
             {
                 string username = HttpContext.User.Identity.Name;
-                //var userinfo = await userInfoes.GetUserInfoByUser(username);
-                // var userinfo = await userInfoes.GetSbuIdByEmployeeEmail(model.Email);
-                
                 var user = new ApplicationUser
                 {
                     UserName = model.Name,
@@ -154,22 +126,7 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
                 AddErrors(result);
             }
 
-            var roles = await _roleManager.Roles.ToListAsync();
-            List<ApplicationRoleViewModel> lstRole = new List<ApplicationRoleViewModel>();
-            foreach (var data in roles)
-            {
-                ApplicationRoleViewModel modelr = new ApplicationRoleViewModel
-                {
-                    RoleId = data.Id,
-                    RoleName = data.Name
-                };
-                lstRole.Add(modelr);
-            }
-            var formData = new RegisterViewModel
-            {
-                userRoles = lstRole,
-            };
-            return View(formData);
+             return RedirectToLocal("/DailyExpenseArea/DailyExpense/Index"); ;
 
         }
 
@@ -523,20 +480,11 @@ namespace DailyExpenseTracker.Areas.Auth.Controllers
         }
 
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
-        //[HttpGet]
-        //public async Task<IActionResult> UserAssignPage(string userTypeId)
-        //{
-        //    try
-        //    {
-        //        var data = await userInfoes.GetUserMenuAccessByUserType(userTypeId);
-        //        return Json(data);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
         #endregion
         #region Helpers
 

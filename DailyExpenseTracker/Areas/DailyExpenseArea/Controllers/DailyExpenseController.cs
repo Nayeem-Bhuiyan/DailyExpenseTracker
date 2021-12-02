@@ -27,11 +27,13 @@ namespace DailyExpenseTracker.Areas.DailyExpenseArea.Controllers
         }
         public async Task<IActionResult> Index()
         {
+           var user= await _userManager.FindByNameAsync(User.Identity.Name);
+            var result = await _dailyExpenseService.GetAll();
+
             DailyExpenseViewModel data = new DailyExpenseViewModel
             {
              categories=await _categoryService.GetAll(),
-             dailyExpenses=await _dailyExpenseService.GetAll(),
-
+             dailyExpenses= result.Where(x=>x.ApplicationUserId== user.Id).ToList(),
             };
             return View(data);
         }
