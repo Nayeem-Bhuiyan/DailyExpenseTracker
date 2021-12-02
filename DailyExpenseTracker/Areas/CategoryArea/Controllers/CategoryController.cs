@@ -46,7 +46,7 @@ namespace DailyExpenseTracker.Areas.CategoryArea.Controllers
                     CategoryName = model.CategoryName
                 };
                  await _categoryService.Insert(obj);
-                return RedirectToAction(nameof(Index));
+                return Redirect("/CategoryArea/Category/Index");
             }
             else if(model.CommandType == "Update")
             {
@@ -56,16 +56,16 @@ namespace DailyExpenseTracker.Areas.CategoryArea.Controllers
                     CategoryName = model.CategoryName
                 };
                 await _categoryService.Update(obj);
-                return RedirectToAction(nameof(Index));
+                return Redirect("/CategoryArea/Category/Index");
             }
             else if (model.CommandType == "Delete")
             {
                 await _categoryService.DeleteById(model.CategoryId);
-                return RedirectToAction(nameof(Index));
+                return Redirect("/CategoryArea/Category/Index");
             }
             else
             {
-                return View(model);
+                return Redirect("/CategoryArea/Category/Index");
             }
 
             
