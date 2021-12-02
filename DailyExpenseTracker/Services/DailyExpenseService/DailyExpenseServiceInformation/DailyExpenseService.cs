@@ -47,7 +47,7 @@ namespace DailyExpenseTracker.Services.DailyExpenseService.DailyExpenseServiceIn
         {
              _context.DailyExpenses.Remove(await GetById(id));
              await _context.SaveChangesAsync();
-              return true;
+             return true;
 
         }
     }
