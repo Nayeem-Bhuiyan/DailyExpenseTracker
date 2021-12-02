@@ -111,7 +111,7 @@
                                         <td>@item?.DateOfExpense?.ToString("dd-MM-yyyy")</td>
                                         <td>@item?.ExpenseDetails</td>
                                         <td>
-                                            <a class="btn btn-warning" onclick="Edit(@item.Id,'@item?.CategoryId,@item?.CostAmount,'@item?.DateOfExpense','@item?.ExpenseDetails')">Edit</a>
+                                            <a class="btn btn-warning" onclick="Edit(@item.Id,@item?.CategoryId,@item?.CostAmount,'@item?.DateOfExpense','@item?.ExpenseDetails')">Edit</a>
                                             <a class="btn btn-danger" onclick="Delete(@item.Id)">Delete</a>
                                         </td>
                                     </tr>
@@ -153,12 +153,32 @@
             $("#ExpenseDetails").val("");
         }
 
-        function Edit(Id, CategoryId, CostAmount, DateOfExpense, ExpenseDetails) {
+        function formatDate(date) {
+            date = new Date(date);
+            var year = date.getFullYear(),
+                month = date.getMonth() + 1, // months are zero indexed
+                day = date.getDate(),
+                hour = date.getHours(),
+                minute = date.getMinutes(),
+                second = date.getSeconds(),
+                hourFormatted = hour % 12 || 12, // hour returned in 24 hour format
+                minuteFormatted = minute < 10 ? "0" + minute : minute,
+                morning = hour < 12 ? "am" : "pm";
+
+            return day + "/" + + month + "/" + year;
+        }
+
+
+        function Edit(Id,CategoryId,CostAmount,DateOfExpense,ExpenseDetails) {
             CleanData();
+
+            var dateData = formatDate(DateOfExpense);
+
+
             $("#DailyExpenseId").val(Id);
             $("#CategoryId").val(CategoryId);
             $("#CostAmount").val(CostAmount);
-            $("#DateOfExpense").val(DateOfExpense);
+            $("#DateOfExpense").val(dateData);
             $("#ExpenseDetails").val(ExpenseDetails);
         }
 
