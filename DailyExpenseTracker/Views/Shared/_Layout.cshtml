@@ -1,5 +1,4 @@
-﻿
-@using DailyExpenseTracker.Services.AuthService.Interfaces
+﻿@using DailyExpenseTracker.Services.AuthService.Interfaces
 @using System
 
 @inject IUserInfoes userInfo
@@ -7,17 +6,13 @@
 
     var userInfos = await userInfo.GetUserInfoByUser(@User.Identity.Name);
 }
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Pike Admin - Free Bootstrap 4 Admin Template</title>
+    <title>Expense Tracker</title>
     <meta name="description" content="Free Bootstrap 4 Admin Theme | Pike Admin">
     <meta name="author" content="Pike Web Development - https://www.pikephp.com">
 
