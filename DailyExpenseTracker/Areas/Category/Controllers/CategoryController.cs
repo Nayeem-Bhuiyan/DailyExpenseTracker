@@ -10,6 +10,7 @@ namespace DailyExpenseTracker.Areas.Category.Controllers
     {
         public IActionResult Index()
         {
+           
             return View();
         }
     }

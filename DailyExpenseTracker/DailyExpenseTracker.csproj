@@ -26,8 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Category\Data\" />
-    <Folder Include="Areas\Category\Models\" />
-    <Folder Include="Areas\Category\Views\" />
   </ItemGroup>
 
 </Project>
