@@ -4,51 +4,113 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form asp-area="CategoryArea" asp-controller="Category" asp-action="Index">
-    <input type="hidden" name="CategoryId" id="CategoryId" value="0" />
-    <input type="hidden" name="CommandType" id="CommandType" value="" />
-    <input type="text" name="CategoryName" id="CategoryName" value="" class="form-control"/>
-    <button type="submit" class="btn btn-success" onclick="Save()">Save</button>
-</form>
+@section Style{
+
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="breadcrumb-holder">
+            <h1 class="main-title float-left">Expense Category</h1>
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-2x"></i></a></li>
+                <li class="breadcrumb-item active"><a href="#">Category</a></li>
+            </ol>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
 
 
+<div class="row">
 
-<table class="table table-bordered table-striped">
-    <thead class="bg-success text-white">
-        <tr>
-            <th>Category</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.categories != null)
-        {
-            @foreach (var item in Model.categories)
-            {
-                <tr>
-                    <td>@item.CategoryName</td>
-                    <td>
-                        <a class="btn btn-warning" onclick="Edit(@item.Id,'@item.CategoryName')">Edit</a>
-                        <a class="btn btn-danger" onclick="Delete(@item.Id)">Delete</a>
-                    </td>
-                </tr>
-            }
-        }
-        else
-        {
-            <tr></tr>
-        }
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3><i class="fa fa-free-code-camp bigfonts"></i>Create New Expense Category</h3>
+            </div>
+
+            <div class="card-body">
+
+                <form autocomplete="off" asp-area="CategoryArea" asp-controller="Category" asp-action="Index">
+                    <input type="hidden" name="CategoryId" id="CategoryId" value="0" />
+                    <input type="hidden" name="CommandType" id="CommandType" value="" />
+                    <div class="form-group row">
+                        <label for="CategoryName" class="col-sm-2 col-form-label">Category</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="CategoryName" name="CategoryName" placeholder="Enter Category Name" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-success" onclick="Save()">Save</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div><!-- end card-->
+    </div>
+</div>
 
 
-    </tbody>
-    
-</table>
+<div class="row">
 
-@section Scripts{ 
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3><i class="fa fa-table"></i>Expense Category Information</h3>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblData" class="table table-bordered table-hover display">
+                        <thead class="bg-success text-white">
+                            <tr>
+                                <th>ID</th>
+                                <th>Category</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.categories != null)
+                            {
+                                @foreach (var item in Model.categories)
+                                {
+                                    <tr>
+                                        <td>@item?.Id</td>
+                                        <td>@item?.CategoryName</td>
+                                        <td>
+                                            <a class="btn btn-warning" onclick="Edit(@item.Id,'@item.CategoryName')">Edit</a>
+                                            <a class="btn btn-danger" onclick="Delete(@item.Id)">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr></tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div><!-- end card-->
+    </div>
+</div>
+
+
+@section Scripts{
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             Clean();
+            $("#tblData").DataTable();
         })
 
         function Clean() {
@@ -57,7 +119,7 @@
             $("#CommandType").val("");
         }
 
-        function Edit(Id,CategoryName) {
+        function Edit(Id, CategoryName) {
             $("#CategoryId").val(Id);
             $("#CategoryName").val(CategoryName);
             $("#CommandType").val("Update");
