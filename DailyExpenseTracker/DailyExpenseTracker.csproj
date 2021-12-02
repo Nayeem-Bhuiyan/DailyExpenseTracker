@@ -27,7 +27,6 @@
   <ItemGroup>
     <Folder Include="Areas\CategoryArea\Data\" />
     <Folder Include="Areas\DailyExpenseArea\Data\" />
-    <Folder Include="Areas\DailyExpenseArea\Models\" />
   </ItemGroup>
 
 </Project>
