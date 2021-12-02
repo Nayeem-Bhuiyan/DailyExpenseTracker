@@ -36,6 +36,8 @@
     <!-- BEGIN CSS for this page -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
     <!-- END CSS for this page -->
+    <link href="~/assets/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
+
     @RenderSection("Style", required: false)
 </head>
 
@@ -416,7 +418,7 @@
     <!-- Counter-Up-->
     <script src="/assets/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
     <script src="/assets/plugins/counterup/jquery.counterup.min.js"></script>
-
+    <script src="~/assets/sweetalert2/dist/sweetalert2.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
     <!-- END Java Script for this page -->
