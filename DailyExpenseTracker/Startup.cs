@@ -20,7 +20,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using DailyExpenseTracker.Services.CategoryServiceInformation.Interfaces;
+using DailyExpenseTracker.Services.CategoryServiceInformation;
 
 namespace DailyExpenseTracker
 {
@@ -119,6 +120,11 @@ namespace DailyExpenseTracker
             #region UserService
             services.AddScoped<IUserInfoes, UserInfoes>();
             #endregion
+
+            #region CategoryService
+            services.AddScoped<ICategoryService, CategoryService>();
+            #endregion
+            
 
             //#region genericRepository
             //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
