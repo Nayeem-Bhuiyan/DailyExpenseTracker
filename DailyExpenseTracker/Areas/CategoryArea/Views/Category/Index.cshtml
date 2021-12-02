@@ -139,7 +139,8 @@
                 var frmdata = {
                     CategoryId:$("#CategoryId").val(),
                     CategoryName:$("#CategoryName").val(),
-                    CommandType:$("#CommandType").val()
+                    CommandType: $("#CommandType").val(),
+                    __RequestVerificationToken: $("[name='__RequestVerificationToken']").val()
                 }
 
                 console.log(frmdata);
@@ -156,7 +157,7 @@
                         $.ajax({
                             url: "/CategoryArea/Category/Index",
                             type: "POST",
-                            data: frmdata,
+                            data: JSON.stringify(frmdata),
                             dataType: "json",
                             beforeSend: function () {
                                 $('#btnSave').attr('disabled', 'disabled');
