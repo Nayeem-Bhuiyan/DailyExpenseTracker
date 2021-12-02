@@ -185,12 +185,6 @@
 
         function Delete(Id) {
 
-            var frmdata = {
-                CategoryId: $("#CategoryId").val(Id),
-                CategoryName:null,
-                CommandType: $("#CommandType").val("Delete")
-            }
-
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to retrieve this!",
@@ -202,8 +196,8 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "/CategoryArea/Category/Index",
-                        data:frmdata,
+                        url: "/CategoryArea/Category/Delete/"+Id,
+                        data: { Id: Id },
                         type: 'POST'
                     })
                         .done(function () {
