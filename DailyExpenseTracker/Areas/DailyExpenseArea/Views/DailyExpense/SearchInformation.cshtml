@@ -1,0 +1,204 @@
+﻿@model DailyExpenseViewModel
+@{
+    ViewData["Title"] = "SearchInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="breadcrumb-holder">
+            <h1 class="main-title float-left">Expense Category</h1>
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-2x"></i></a></li>
+                <li class="breadcrumb-item active"><a href="#">Search</a></li>
+            </ol>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <form autocomplete="off" id="frmData" asp-area="DailyExpenseArea" asp-controller="DailyExpense" asp-action="SearchRecord">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group row">
+                        <label for="startDate" class="col-sm-4 col-form-label">From Date</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control bg-success text-white" id="startDate" name="startDate" required autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group row">
+                        <label for="endDate" class="col-sm-4 col-form-label">To Date</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control bg-success text-white" id="endDate" name="endDate" required autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary" id="btnSearch">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3><i class="fa fa-table"></i>Search Expense</h3>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblData" class="table table-bordered table-hover display">
+                        <thead class="bg-success text-white">
+                            <tr>
+                                <th>ID</th>
+                                <th>Category</th>
+                                <th>CostAmount</th>
+                                <th>Date</th>
+                                <th>ExpenseDetails</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.dailyExpenses != null)
+                            {
+                                @foreach (var item in Model.dailyExpenses)
+                                {
+                                    <tr>
+                                        <td>@item?.Id</td>
+                                        <td>@item?.Category?.CategoryName</td>
+                                        <td>@item?.CostAmount</td>
+                                        <td>@item?.DateOfExpense?.ToString("dd-MM-yyyy")</td>
+                                        <td>@item?.ExpenseDetails</td>
+                                        <td>
+                                            <a class="btn btn-warning" onclick="Edit(@item.Id,@item?.CategoryId,@item?.CostAmount,'@item?.DateOfExpense','@item?.ExpenseDetails')">Edit</a>
+                                            <a class="btn btn-danger" onclick="Delete(@item.Id)">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr></tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div><!-- end card-->
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+
+            $("#tblData").DataTable({
+                order: [[0, "desc"]]
+            });
+
+            $('#startDate').flatpickr({ dateFormat: "Y-m-d", minDate: "@DateTime.Now.ToString("MM/dd/yyyy")", maxDate:"today" });
+            $('#endDate').flatpickr({ dateFormat: "Y-m-d", minDate: "@DateTime.Now.ToString("MM/dd/yyyy")", maxDate:"today" });
+        })
+
+
+
+        function formatDate(date) {
+            date = new Date(date);
+            var year = date.getFullYear(),
+                month = date.getMonth() + 1, // months are zero indexed
+                day = date.getDate(),
+                hour = date.getHours(),
+                minute = date.getMinutes(),
+                second = date.getSeconds(),
+                hourFormatted = hour % 12 || 12, // hour returned in 24 hour format
+                minuteFormatted = minute < 10 ? "0" + minute : minute,
+                morning = hour < 12 ? "am" : "pm";
+            return day + "/" + + month + "/" + year;
+        }
+
+
+
+
+        $('#btnSearch').click(function () {
+
+            $('#frmData').on('submit', function (event) {
+
+                event.preventDefault();
+                var frmSearchData = {
+                    startDate: $("#startDate").val(),
+                    endDate: $("#endDate").val()
+                }
+
+                console.log(frmSearchData);
+
+
+                        $.ajax({
+                            url: "/DailyExpenseArea/DailyExpense/SearchRecord",
+                            type: "POST",
+                            data: frmSearchData,
+                            beforeSend: function () {
+                                $('#btnSearch').attr('disabled', 'disabled');
+                                $('#btnSearch').val('Submitting...');
+
+                            },
+                        }).done(function (response) {
+                            console.log(response);
+
+
+                            $("#btnSearch").removeAttr('disabled');
+
+                            if (response.length>0) {
+                                $.each(response, function (index, data) {
+                                    $("#tblData tbody").empty();
+                                    $("#tblData tbody").append(`<tr>
+                                <td>${data.Id}</td>
+                                <td>${data.Category?.CategoryName}</td>
+                                <td>${data?.CostAmount}</td>
+                                <td>${formatDate(data?.DateOfExpense)}</td>
+                                <td>${data?.ExpenseDetails}</td>
+                                <td>
+                                    <a class="btn btn-danger" onclick="Delete(${data.Id})">Delete</a>
+                                </td>
+                             </tr>`);
+                                })
+                            }
+                            else {
+                                swal.fire('warning', 'Sorry!!  No data found', 'warning').then(function() {
+                                    location.reload();
+                                })
+                            }
+
+                            
+                        }).fail(function () {
+                            $("#btnSearch").removeAttr('disabled');
+                            swal.fire('warning', 'Error!!', 'warning');
+                        })
+            })
+        })
+
+    </script>
+}
+
+
+

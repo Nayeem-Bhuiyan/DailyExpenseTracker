@@ -38,6 +38,30 @@ namespace DailyExpenseTracker.Areas.DailyExpenseArea.Controllers
             return View(data);
         }
 
+
+        public async Task<IActionResult> SearchInformation()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var result = await _dailyExpenseService.GetAll();
+
+            var data = new DailyExpenseViewModel()
+            {
+                dailyExpenses = result.Where(x => x.ApplicationUserId == user.Id).ToList()
+            };
+
+            return View(data);
+        }
+
+        public async Task<IActionResult> SearchRecord(DateTime startDate,DateTime endDate)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var result = await _dailyExpenseService.GetAll();
+            return Json(result.Where(x => x.ApplicationUserId == user.Id && x.DateOfExpense >= startDate && x.DateOfExpense <= endDate).ToList());
+        }
+
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index([FromForm] DailyExpenseViewModel model)
