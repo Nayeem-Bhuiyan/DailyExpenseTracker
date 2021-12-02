@@ -121,11 +121,6 @@ namespace DailyExpenseTracker
             services.AddScoped<IUserInfoes, UserInfoes>();
             #endregion
 
-            #region CategoryService
-            services.AddScoped<ICategoryService, CategoryService>();
-            #endregion
-            
-
             //#region genericRepository
             //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             //#endregion
@@ -184,8 +179,6 @@ namespace DailyExpenseTracker
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
-
-
 
             app.UseMvc(routes => {
                 routes.MapRoute(
