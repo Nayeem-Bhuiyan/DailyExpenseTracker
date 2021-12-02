@@ -130,7 +130,8 @@
                 event.preventDefault();
                 var frmdata = {
                     CategoryId:$("#CategoryId").val(),
-                    CategoryName:$("#CategoryName").val(),
+                    CategoryName: $("#CategoryName").val(),
+                    __RequestVerificationToken: $("[name='__RequestVerificationToken']").val()
                 }
 
                 console.log(frmdata);

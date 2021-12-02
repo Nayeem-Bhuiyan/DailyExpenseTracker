@@ -10,8 +10,8 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation.Interfaces
     {
         Task<IEnumerable<Category>> GetAll();
         Task<Category> GetById(int? Id);
-        Task<int> Insert(Category Category);
-        Task<int> Update(Category model);
+        Task<bool> Insert(Category model);
+        Task<bool> Update(Category model);
         Task<bool> DeleteById(int? Id);
     }
 }

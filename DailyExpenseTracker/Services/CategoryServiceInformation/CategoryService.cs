@@ -96,7 +96,7 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
             }
         }
 
-        public async Task<int> Insert(Category model)
+        public async Task<bool> Insert(Category model)
         {
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
@@ -108,18 +108,18 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
                         //cmd.Parameters.Add(new SqlParameter("@Category1", model.Id));
                         cmd.Parameters.Add(new SqlParameter("@Category2", model.CategoryName));
                         await con.OpenAsync();
-                        return await cmd.ExecuteNonQueryAsync();
+                        await cmd.ExecuteNonQueryAsync();
+                        return true;
                     }
                     catch (System.Exception)
                     {
-                        return 0;
                         throw;
                     }
                 }
             }
         }
 
-        public async Task<int> Update(Category model)
+        public async Task<bool> Update(Category model)
         {
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
@@ -132,11 +132,11 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
                         cmd.Parameters.Add(new SqlParameter("@Id", model.Id));
                         cmd.Parameters.Add(new SqlParameter("@CategoryName", model.CategoryName));
                         await con.OpenAsync();
-                        return await cmd.ExecuteNonQueryAsync();
+                        await cmd.ExecuteNonQueryAsync();
+                        return true;
                     }
                     catch (System.Exception)
                     {
-                        return 0;
                         throw;
                     }
                 }
