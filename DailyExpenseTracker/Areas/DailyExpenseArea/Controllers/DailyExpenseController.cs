@@ -51,7 +51,7 @@ namespace DailyExpenseTracker.Areas.DailyExpenseArea.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(int? Id)
         {
-            return Json(await -_dailyExpenseService.Delete(Id));
+            return Json(await _dailyExpenseService.Delete(Id));
         }
     }
 }
