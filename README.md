@@ -1,1 +1,12 @@
-# DailyExpenseTracker
+# DailyExpenseTracker(Asp.net core(5.0) mvc)
+
+Tools:(Please use the given tools to run the project)
+
+Visual Studio2019
+
+Sql Server 2019
+
+Install sdk https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-5.0.201-windows-x64-binaries
+
+Project fully done by jquery ajaxed based operation in client side and  and on the backend linq ,store procedure are used in this project
+
