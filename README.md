@@ -1,5 +1,9 @@
 # DailyExpenseTracker(Asp.net core(5.0) mvc)
 
+Please First change connection string in appsettings using your sql server name;
+
+Restore the database backup to include store procedure with project 
+
 Tools:(Please use the given tools to run the project)
 
 Visual Studio2019
