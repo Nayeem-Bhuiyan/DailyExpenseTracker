@@ -1,5 +1,6 @@
 ﻿using DailyExpenseTracker.Data;
 using DailyExpenseTracker.Data.Entity;
+using DailyExpenseTracker.Services.CategoryServiceInformation.Interfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DailyExpenseTracker.Services.CategoryServiceInformation
 {
-    public class CategoryService
+    public class CategoryService: ICategoryService
     {
         private readonly string _connectionString;
 
@@ -20,7 +21,7 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
         {
             using (SqlConnection sql = new SqlConnection(_connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("GetAllCategory", sql))
+                using (SqlCommand cmd = new SqlCommand("Sp_GetAllCategory", sql))
                 {
                     try
                     {
@@ -63,11 +64,11 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
             }
         }
 
-        public async Task<Category> GetById(int Id)
+        public async Task<Category> GetById(int? Id)
         {
             using (SqlConnection sql = new SqlConnection(_connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("GetCategoryById", sql))
+                using (SqlCommand cmd = new SqlCommand("Sp_GetCategoryById", sql))
                 {
                    
                     try
@@ -99,7 +100,7 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
         {
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("InsertCategory", con))
+                using (SqlCommand cmd = new SqlCommand("Sp_InsertCategory", con))
                 {
                     try
                     {
@@ -122,7 +123,7 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
         {
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("UpdateCategory", con))
+                using (SqlCommand cmd = new SqlCommand("Sp_UpdateCategory", con))
                 {
                     try
                     {
@@ -142,13 +143,14 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
             }
         }
 
+
         public async Task<bool> DeleteById(int? Id)
         {
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("DeleteCategory", con))
+                    using (SqlCommand cmd = new SqlCommand("Sp_DeleteCategory", con))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.Parameters.Add(new SqlParameter("@Id", Id));
@@ -164,6 +166,5 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
                 }
             }
         }
-
     }
 }

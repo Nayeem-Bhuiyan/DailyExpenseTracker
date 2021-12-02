@@ -25,9 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\CategoryArea\Controllers\" />
     <Folder Include="Areas\CategoryArea\Data\" />
-    <Folder Include="Areas\CategoryArea\Views\" />
   </ItemGroup>
 
 </Project>

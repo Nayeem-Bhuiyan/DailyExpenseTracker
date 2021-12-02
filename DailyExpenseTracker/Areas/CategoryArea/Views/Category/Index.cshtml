@@ -1,0 +1,66 @@
+﻿@model CategoryViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-area="CategoryArea" asp-controller="Category" asp-action="Index">
+    <input type="hidden" name="CategoryId" id="CategoryId" value="0" />
+    <input type="hidden" name="CommandType" id="CommandType" value="" />
+    <input type="text" name="CategoryName" id="CategoryName" value="" class="form-control"/>
+    <button type="submit" class="btn btn-success" onclick="Save()">Save</button>
+</form>
+
+
+
+<table class="table table-bordered table-striped">
+    <thead class="bg-success text-white">
+        <tr>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.categories != null)
+        {
+            @foreach (var item in Model.categories)
+            {
+                <tr>
+                    <td>@item.CategoryName</td>
+                    <td>
+                        <a class="btn btn-warning" onclick="Edit(@item.Id,'@item.CategoryName')">Edit</a>
+                        <a class="btn btn-danger" onclick="Delete(@item.Id)">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr></tr>
+        }
+
+
+    </tbody>
+    
+</table>
+
+@section Scripts{ 
+
+    <script>
+        $(document).ready(function() {
+            Clean();
+        })
+
+        function Clean() {
+            $("#CategoryId").val(0);
+            $("#CategoryName").val("");
+            $("#CommandType").val("");
+        }
+
+        function Edit(Id,CategoryName) {
+            $("#CategoryId").val(Id);
+            $("#CategoryName").val(CategoryName);
+            $("#CommandType").val("Update");
+        }
+    </script>
+}

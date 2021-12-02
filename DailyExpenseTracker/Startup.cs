@@ -120,12 +120,9 @@ namespace DailyExpenseTracker
             #region UserService
             services.AddScoped<IUserInfoes, UserInfoes>();
             #endregion
-
-            //#region genericRepository
-            //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            //#endregion
-
-
+            #region UserService
+            services.AddScoped<ICategoryService,CategoryService>();
+            #endregion
             #region PDF
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
             #endregion
