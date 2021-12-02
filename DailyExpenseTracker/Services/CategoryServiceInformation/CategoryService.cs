@@ -105,8 +105,8 @@ namespace DailyExpenseTracker.Services.CategoryServiceInformation
                     try
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        //cmd.Parameters.Add(new SqlParameter("@Category1", model.Id));
-                        cmd.Parameters.Add(new SqlParameter("@Category2", model.CategoryName));
+                        //cmd.Parameters.Add(new SqlParameter("@Id", model.CategoryId));
+                        cmd.Parameters.Add(new SqlParameter("@CategoryName", model.CategoryName));
                         await con.OpenAsync();
                         await cmd.ExecuteNonQueryAsync();
                         return true;

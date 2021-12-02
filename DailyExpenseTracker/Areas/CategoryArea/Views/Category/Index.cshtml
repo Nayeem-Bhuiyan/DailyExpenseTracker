@@ -76,7 +76,7 @@
                         <tbody>
                             @if (Model.categories != null)
                             {
-                                @foreach (var item in Model.categories)
+                                @foreach (var item in Model.categories.OrderByDescending(x=>x.Id))
                                 {
                                     <tr>
                                         <td>@item?.Id</td>
@@ -129,9 +129,9 @@
 
                 event.preventDefault();
                 var frmdata = {
+                    __RequestVerificationToken: $("[name='__RequestVerificationToken']").val(),
                     CategoryId:$("#CategoryId").val(),
                     CategoryName: $("#CategoryName").val(),
-                    __RequestVerificationToken: $("[name='__RequestVerificationToken']").val()
                 }
 
                 console.log(frmdata);
