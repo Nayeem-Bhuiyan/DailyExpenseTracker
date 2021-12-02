@@ -39,93 +39,29 @@
 <body class="adminbody">
 
     <div id="main">
-
         <!-- top bar navigation -->
         <div class="headerbar">
-
             <!-- LOGO -->
             <div class="headerbar-left">
                 <a href="index.html" class="logo"><img alt="Logo" src="/assets/images/logo.png" /> <span>Admin</span></a>
             </div>
-
             <nav class="navbar-custom">
-
                 <ul class="list-inline float-right mb-0">
-
                     <li class="list-inline-item dropdown notif">
-                        <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="fa fa-fw fa-bell-o"></i><span class="notif-bullet"></span>
+                        <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="/assets/images/avatars/admin.png" alt="Profile image" class="avatar-rounded">
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg">
-                            <!-- item-->
-                            <div class="dropdown-item noti-title">
-                                <h5><small><span class="label label-danger pull-xs-right">5</span>Allerts</small></h5>
-                            </div>
-
-                            <!-- item-->
-                            <a href="#" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-faded">
-                                    <img src="/assets/images/avatars/avatar2.png" alt="img" class="rounded-circle img-fluid">
-                                </div>
-                                <p class="notify-details">
-                                    <b>John Doe</b>
-                                    <span>User registration</span>
-                                    <small class="text-muted">3 minutes ago</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="#" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-faded">
-                                    <img src="/assets/images/avatars/avatar3.png" alt="img" class="rounded-circle img-fluid">
-                                </div>
-                                <p class="notify-details">
-                                    <b>Michael Cox</b>
-                                    <span>Task 2 completed</span>
-                                    <small class="text-muted">12 minutes ago</small>
-                                </p>
-                            </a>
-
-                            <!-- item-->
-                            <a href="#" class="dropdown-item notify-item">
-                                <div class="notify-icon bg-faded">
-                                    <img src="/assets/images/avatars/avatar4.png" alt="img" class="rounded-circle img-fluid">
-                                </div>
-                                <p class="notify-details">
-                                    <b>Michelle Dolores</b>
-                                    <span>New job completed</span>
-                                    <small class="text-muted">35 minutes ago</small>
-                                </p>
-                            </a>
-
-                            <!-- All-->
-                            <a href="#" class="dropdown-item notify-item notify-all">
-                                View All Allerts
-                            </a>
-
-                        </div>
-                    </li>
-
-
-                    @if (userInfos?.UserName != null && User.Identity.IsAuthenticated)
-                    {
-                        <li class="list-inline-item dropdown notif">
-
-                            <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="/assets/images/avatars/admin.png" alt="Profile image" class="avatar-rounded">
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            @if (userInfos?.UserName != null && User.Identity.IsAuthenticated)
+                            {
                                 <!-- item-->
                                 <div class="dropdown-item noti-title">
                                     <h5 class="text-overflow"><small>@userInfos?.UserName</small> </h5>
                                 </div>
-
                                 <!-- item-->
                                 <a href="#" class="dropdown-item notify-item">
                                     <i class="fa fa-user"></i> <span>Profile</span>
                                 </a>
-
                                 <!-- item-->
                                 <a href="javascript:;" id="changePassword" class="dropdown-item notify-item" data-toggle="modal" data-target="#changePasswordModals">
                                     <i class="fa fa-power-off"></i> <span>Change Password</span>
@@ -133,14 +69,16 @@
                                 <a href="#" id="LogOut" class="dropdown-item notify-item" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fa fa-power-off"></i> <span>Logout</span>
                                 </a>
-                            </div>
-                            
-                        </li>
-
-
-                    }
-                    </ul>
-
+                            }
+                            else
+                            {
+                                <a href="/Auth/Account/Login" id="LogOut" class="dropdown-item notify-item">
+                                    <i class="fa fa-power-off"></i> <span>Login</span>
+                                </a>
+                            }
+                        </div>
+                    </li>
+                </ul>
                 <ul class="list-inline menu-left mb-0">
                     <li class="float-left">
                         <button class="button-menu-mobile open-left">
@@ -148,18 +86,13 @@
                         </button>
                     </li>
                 </ul>
-
             </nav>
-
         </div>
         <!-- End Navigation -->
         <!-- Left Sidebar -->
         <div class="left main-sidebar">
-
             <div class="sidebar-inner leftscroll">
-
                 <div id="sidebar-menu">
-
                     <ul>
                         @if (userInfos?.UserName != null && User.Identity.IsAuthenticated)
                         {
@@ -174,7 +107,6 @@
                                     @*<li><a href="tables-datatable.html">Data Tables</a></li>*@
                                 </ul>
                             </li>
-
                         }
                         else
                         {
@@ -183,35 +115,23 @@
                             </li>
                         }
                     </ul>
-
                     <div class="clearfix"></div>
-
                 </div>
-
                 <div class="clearfix"></div>
-
             </div>
-
         </div>
         <!-- End Sidebar -->
-
-
         <div class="content-page">
-
             <!-- Start content -->
             <div class="content">
-
                 <div class="container-fluid">
                     @RenderBody()
                 </div>
                 <!-- END container-fluid -->
-
             </div>
             <!-- END content -->
-
         </div>
         <!-- END content-page -->
-
         <footer class="footer">
             <span class="text-right">
                 Copyright <a target="_blank" href="#">Daily Expense Tracker</a>
@@ -220,30 +140,23 @@
                 Powered by <a target="_blank" href="#"><b>Nayeem Bhuiyan</b></a>
             </span>
         </footer>
-
     </div>
     <!-- END main -->
-
     <script src="/assets/js/modernizr.min.js"></script>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/moment.min.js"></script>
-
     <script src="/assets/js/popper.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
-
     <script src="/assets/js/detect.js"></script>
     <script src="/assets/js/fastclick.js"></script>
     <script src="/assets/js/jquery.blockUI.js"></script>
     <script src="/assets/js/jquery.nicescroll.js"></script>
-
     <!-- App js -->
     <script src="/assets/js/pikeadmin.js"></script>
-
     <!-- BEGIN Java Script for this page -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-
     <!-- Counter-Up-->
     <script src="/assets/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
     <script src="/assets/plugins/counterup/jquery.counterup.min.js"></script>
