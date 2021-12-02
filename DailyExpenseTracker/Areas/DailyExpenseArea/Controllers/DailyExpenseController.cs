@@ -1,4 +1,5 @@
 ﻿using DailyExpenseTracker.Areas.DailyExpenseArea.Models;
+using DailyExpenseTracker.Data.Entity;
 using DailyExpenseTracker.Services.CategoryServiceInformation;
 using DailyExpenseTracker.Services.DailyExpenseService.DailyExpenseServiceInformation;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,29 @@ namespace DailyExpenseTracker.Areas.DailyExpenseArea.Controllers
 
             };
             return View(data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index([FromForm] DailyExpenseViewModel model)
+        {
+            DailyExpense obj = new DailyExpense()
+            {
+                Id = model.DailyExpenseId,
+                ApplicationUserId = model.ApplicationUserId,
+                CategoryId = model.CategoryId,
+                CostAmount = model.CostAmount,
+                DateOfExpense = model.DateOfExpense,
+            };
+            await _dailyExpenseService.Save(obj);
+            return Redirect("/CategoryArea/Category/Index");
+
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(int? Id)
+        {
+            return Json(await -_dailyExpenseService.Delete(Id));
         }
     }
 }

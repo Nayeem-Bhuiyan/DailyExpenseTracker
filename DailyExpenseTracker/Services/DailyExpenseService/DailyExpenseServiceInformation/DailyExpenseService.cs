@@ -1,5 +1,6 @@
 ﻿using DailyExpenseTracker.Data;
 using DailyExpenseTracker.Data.Entity;
+using DailyExpenseTracker.Services.DailyExpenseService.DailyExpenseServiceInformation.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
