@@ -34,7 +34,6 @@
 
                 <form autocomplete="off" id="frmData" asp-area="CategoryArea" asp-controller="Category" asp-action="Index">
                     <input type="hidden" name="CategoryId" id="CategoryId" value="0" />
-                    <input type="hidden" name="CommandType" id="CommandType" value="" />
                     <div class="form-group row">
                         <label for="CategoryName" class="col-sm-2 col-form-label">Category</label>
                         <div class="col-sm-6">
@@ -116,14 +115,12 @@
         function CleanData() {
             $("#CategoryId").val(0);
             $("#CategoryName").val("");
-            $("#CommandType").val("");
         }
 
         function Edit(Id, CategoryName) {
             CleanData();
             $("#CategoryId").val(Id);
             $("#CategoryName").val(CategoryName);
-            $("#CommandType").val("Update");
         }
 
         $('#btnSave').click(function () {
@@ -131,16 +128,9 @@
             $('#frmData').on('submit', function (event) {
 
                 event.preventDefault();
-                if ($("#CategoryId").val()>0) {
-                    $("#CommandType").val("Update")
-                } else {
-                    $("#CommandType").val("Insert")
-                }
                 var frmdata = {
                     CategoryId:$("#CategoryId").val(),
                     CategoryName:$("#CategoryName").val(),
-                    CommandType: $("#CommandType").val(),
-                    __RequestVerificationToken: $("[name='__RequestVerificationToken']").val()
                 }
 
                 console.log(frmdata);
@@ -157,8 +147,7 @@
                         $.ajax({
                             url: "/CategoryArea/Category/Index",
                             type: "POST",
-                            data: JSON.stringify(frmdata),
-                            dataType: "json",
+                            data:frmdata,
                             beforeSend: function () {
                                 $('#btnSave').attr('disabled', 'disabled');
                                 $('#btnSave').val('Submitting...');

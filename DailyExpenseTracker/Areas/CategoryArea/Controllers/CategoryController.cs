@@ -39,36 +39,28 @@ namespace DailyExpenseTracker.Areas.CategoryArea.Controllers
         public async Task<ActionResult> Index([FromForm] CategoryViewModel model)
         {
 
-            if (model.CommandType=="Insert")
+            if (model.CategoryId>0)
             {
+               
                 Category obj = new Category()
                 {
-                    CategoryName = model.CategoryName
-                };
-                 await _categoryService.Insert(obj);
-                return Redirect("/CategoryArea/Category/Index");
-            }
-            else if(model.CommandType == "Update")
-            {
-                Category obj = new Category()
-                {
-                    Id=model.CategoryId,
+                    Id = model.CategoryId,
                     CategoryName = model.CategoryName
                 };
                 await _categoryService.Update(obj);
-                return Redirect("/CategoryArea/Category/Index");
-            }
-            else if (model.CommandType == "Delete")
-            {
-                await _categoryService.DeleteById(model.CategoryId);
-                return Redirect("/CategoryArea/Category/Index");
             }
             else
             {
-                return Redirect("/CategoryArea/Category/Index");
-            }
+                Category obj = new Category()
+                {
 
-            
+                    CategoryName = model.CategoryName
+                };
+                await _categoryService.Insert(obj);
+
+            }
+            return Redirect("/CategoryArea/Category/Index");
+
         }
 
         [HttpPost]
