@@ -21,12 +21,12 @@ namespace DailyExpenseTracker.Services.DailyExpenseService.DailyExpenseServiceIn
 
         public async Task<IEnumerable<DailyExpense>> GetAll()
         {
-          return  await _context.DailyExpenses.ToListAsync();
+          return  await _context.DailyExpenses.Include(x=>x.ApplicationUser).Include(x => x.Category).AsNoTracking().ToListAsync();
         }
 
         public async Task<DailyExpense> GetById(int? id)
         {
-            return await _context.DailyExpenses.Where(x=>x.Id==id).FirstOrDefaultAsync();
+            return await _context.DailyExpenses.Where(x=>x.Id==id).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task<int> Save(DailyExpense model)

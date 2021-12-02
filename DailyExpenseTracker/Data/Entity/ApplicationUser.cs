@@ -9,16 +9,6 @@ namespace DailyExpenseTracker.Data.Entity
     {
         
         public int? isActive { get; set; }
-
-        //public int? thanaId { get; set; }
-        //public Thana  thana { get; set; }
-
-        //public int? districtId { get; set; }
-        //public District district { get; set; }
-
-        //public int? divisionId { get; set; }
-        //public Division  division { get; set; }
-
         public DateTime? createdAt { get; set; }
         [MaxLength(120)]
         public string createdBy { get; set; }

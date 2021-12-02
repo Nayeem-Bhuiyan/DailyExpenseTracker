@@ -16,12 +16,8 @@ namespace DailyExpenseTracker.Data.Entity
         [DataType(DataType.Date)]
         public DateTime? DateOfExpense { get; set; }
         public decimal? CostAmount { get; set; }
-
-        [ForeignKey("ApplicationUserId")]
-        public int? ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-
-        [ForeignKey("CategoryId")]
         public int? CategoryId { get; set; }
         public Category Category { get; set; }
     }
