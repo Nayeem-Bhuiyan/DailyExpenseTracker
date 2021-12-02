@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DailyExpenseTracker.Areas.DailyExpenseArea.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,14 @@ namespace DailyExpenseTracker.Areas.DailyExpenseArea.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            DailyExpenseViewModel data = new DailyExpenseViewModel
+            {
+             
+            };
+
+
+
+            return View(data);
         }
     }
 }

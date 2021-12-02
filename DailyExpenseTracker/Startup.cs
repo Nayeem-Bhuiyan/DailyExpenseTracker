@@ -22,6 +22,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DailyExpenseTracker.Services.CategoryServiceInformation.Interfaces;
 using DailyExpenseTracker.Services.CategoryServiceInformation;
+using DailyExpenseTracker.Services.DailyExpenseService.DailyExpenseServiceInformation.Interface;
+using DailyExpenseTracker.Services.DailyExpenseService.DailyExpenseServiceInformation;
 
 namespace DailyExpenseTracker
 {
@@ -119,6 +121,9 @@ namespace DailyExpenseTracker
 
             #region UserService
             services.AddScoped<IUserInfoes, UserInfoes>();
+            #endregion
+            #region IDailyExpenseService
+            services.AddScoped<IDailyExpenseService, DailyExpenseService>();
             #endregion
             #region UserService
             services.AddScoped<ICategoryService,CategoryService>();
