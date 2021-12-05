@@ -12,5 +12,5 @@ Sql Server 2019
 
 Install sdk https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-5.0.201-windows-x64-binaries
 
-Project fully done by jquery ajaxed based operation in client side and  and on the backend linq ,store procedure are used in this project
+Project fully done by jquery ajaxed based operation in client side and on the backend linq ,store procedure are used in this project
 
